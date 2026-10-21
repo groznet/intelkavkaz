@@ -1,0 +1,200 @@
+{{ define "main" }}
+
+<!-- ====== HERO ====== -->
+<section class="relative overflow-hidden">
+    <div class="container mx-auto px-4 lg:px-8 py-8 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+            <div class="lg:col-span-8">
+                <span class="inline-flex items-center text-primary text-xs font-bold py-1.5 uppercase tracking-widest mb-3">
+                    Всероссийская ассоциация «Интеллектуальная Россия»
+                </span>
+                <h1 class="heading-font text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6">
+                    Интеллектуальный<br><span class="text-primary">Кавказ</span>
+                </h1>
+                <p class="text-gray-700 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
+                    Региональное отделение Всероссийской ассоциации общественных объединений «Интеллектуальная Россия» в Чеченской Республике. Развиваем интеллектуальное сообщество, общественные инициативы, образовательные и просветительские проекты.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="/news" class="btn-primary pr-7 py-3 text-base inline-flex items-center">
+                        <i class="fas fa-newspaper mr-2"></i>Новости
+                    </a>
+                    <a href="/about" class="btn-outline-secondary pr-7 py-3 text-base inline-flex items-center">
+                        <i class="fas fa-arrow-right mr-2"></i>Об ассоциации
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4">
+                <div class="px-6 py-0">
+                    <img src="/assets/images/LomAli.png" alt="Мовлатов Лом-Али Ибрагимович" class="w-32 h-32 object-cover mb-4" width="672" height="671">
+                    <p class="text-xs font-bold uppercase tracking-widest text-muted mb-2">Председатель</p>
+                    <h2 class="heading-font text-2xl font-extrabold text-gray-900 leading-tight">Мовлатов Лом-Али Ибрагимович</h2>
+                    <p class="text-sm text-gray-600 mt-3">Региональное отделение ВАОО «Интеллектуальная Россия» в Чеченской Республике</p>
+                    <div class="mt-4 pt-4 text-sm space-y-1">
+                        <p><i class="fas fa-phone-alt w-5 text-primary"></i><a href="tel:+79280222140" class="hover:text-accent">8 (928) 022-21-40</a></p>
+                        <p><i class="fas fa-envelope w-5 text-primary"></i><a href="mailto:info@intelkavkaz.ru" class="hover:text-accent">info@intelkavkaz.ru</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="" aria-hidden="true"></div>
+
+<!-- ====== LATEST NEWS: card grid ====== -->
+<section class="py-8 md:py-12">
+    <div class="container mx-auto px-4 lg:px-8">
+
+        {{ $allNews := where site.RegularPages "Section" "news" }}
+        {{ $featured := first 1 $allNews }}
+        {{ $secondary := (after 1 $allNews) | first 4 }}
+
+        <div class="flex items-end justify-between mb-6 pb-3">
+            <h2 class="heading-font text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900">
+                Последние новости
+            </h2>
+            <a href="/news" class="text-gray-900 font-bold text-sm md:text-base hover:text-accent flex items-center gap-1.5">
+                Все новости
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+
+            {{ range $featured }}
+            {{ $media := partial "post-media.html" . }}
+            <article class="group news-card overflow-hidden flex flex-col md:col-span-2 lg:col-span-2">
+                <div class="relative overflow-hidden">
+                    {{ $featuredImgSrc := $media.featured | default "/assets/images/post-thumbnail.jpg" }}
+                    {{ $focalY := .Params.focalY | default 30 }}
+                    {{ $focalX := .Params.focalX | default 50 }}
+
+                    <img
+                        src="{{ $featuredImgSrc }}"
+                        alt="{{ .Title }}"
+                        class="w-full h-64 sm:h-80 lg:h-[26rem] object-cover"
+                        style="object-position: {{ $focalX }}% {{ $focalY }}%;"
+                        loading="lazy"
+                    />
+
+                    {{ if $media.videos }}
+                    <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="w-16 h-16 bg-black/50 flex items-center justify-center">
+                            <i class="fas fa-play text-white text-xl ml-1"></i>
+                        </span>
+                    </span>
+                    {{ end }}
+                </div>
+
+                <div class="py-4 md:py-5 flex flex-col flex-grow">
+                    <div class="flex items-center gap-3 text-xs text-gray-500 mb-3 uppercase tracking-wide">
+                        <span class="font-bold text-primary">{{ with .Params.categories }}{{ index . 0 }}{{ else }}Новости{{ end }}</span>
+                        <span class="w-1 h-1"></span>
+                        <span><i class="far fa-calendar-alt mr-1"></i>{{ time.Format "2 January 2006" .Date }}</span>
+                        <span class="w-1 h-1"></span>
+                        <span><i class="far fa-user mr-1"></i>{{ .Params.author | default "Пресс-служба" }}</span>
+                    </div>
+                    <h3 class="news-card-title heading-font text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3"> <a href="{{ .RelPermalink }}">{{ .Title }}</a> </h3>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed flex-grow">
+                        {{ .Summary | truncate 400 }}
+                    </p>
+                    <div class="mt-5 pt-4">
+                        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-gray-900 font-bold text-sm hover:text-accent">
+                            Читать полностью
+                            <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+
+            {{ range $secondary }}
+            {{ $media := partial "post-media.html" . }}
+            <article class="group news-card overflow-hidden flex flex-col">
+                <div class="relative aspect-[16/10] overflow-hidden">
+                    {{ $imgSrc := $media.featured | default "/assets/images/post-thumbnail.jpg" }}
+                    {{ $focalY := .Params.focalY | default 25 }}
+                    {{ $focalX := .Params.focalX | default 50 }}
+
+                    <img
+                        src="{{ $imgSrc }}"
+                        alt="{{ .Title }}"
+                        class="w-full h-full object-cover"
+                        style="object-position: {{ $focalX }}% {{ $focalY }}%;"
+                        loading="lazy"
+                    />
+
+                    {{ if $media.videos }}
+                    <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="w-10 h-10 bg-black/50 flex items-center justify-center">
+                            <i class="fas fa-play text-white text-sm ml-0.5"></i>
+                        </span>
+                    </span>
+                    {{ end }}
+                </div>
+                <div class="flex-1 py-3 md:py-4 flex flex-col min-w-0">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-gray-500 text-xs uppercase tracking-wide mb-2 flex items-center">
+                        <i class="far fa-calendar-alt mr-1" aria-hidden="true"></i>{{ .Date.Format "02.01.2006" }}
+                    </time>
+                    <h4 class="news-card-title heading-font text-lg font-extrabold text-gray-900 line-clamp-3">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h4>
+                    <p class="text-gray-600 text-sm mt-2 line-clamp-2">
+                        {{ .Summary | truncate 80 }}
+                    </p>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+
+        <div class="mt-5">
+            <a href="{{ "news" | relURL }}" class="group flex items-center justify-between w-full py-3 hover:text-primary">
+                <span class="text-base font-bold">Все новости →</span>
+                <span class="text-sm opacity-70">{{ len $allNews }} публикаций</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== MISSION ====== -->
+<section class="py-10 md:py-14">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-5">
+                <h2 class="heading-font text-4xl md:text-5xl font-extrabold">Миссия и направления</h2>
+            </div>
+            <div class="lg:col-span-7">
+                <p class="text-secondary text-lg leading-relaxed">«Интеллектуальный Кавказ» — региональное отделение Всероссийской ассоциации общественных объединений «Интеллектуальная Россия» в Чеченской Республике. Мы объединяем людей, для которых знания и интеллектуальное развитие — ценность, и создаём площадки для общественных инициатив, образования и просвещения.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <div class="py-4"><i class="fas fa-users text-3xl mb-4 block"></i><h3 class="text-xl font-extrabold mb-2">Интеллектуальное сообщество</h3><p class="text-secondary text-sm">Объединяем молодёжь, студентов, педагогов и лидеров общественного мнения.</p></div>
+            <div class="py-4"><i class="fas fa-graduation-cap text-3xl mb-4 block"></i><h3 class="text-xl font-extrabold mb-2">Образование и просвещение</h3><p class="text-secondary text-sm">Образовательные и просветительские проекты для жителей Чеченской Республики и Северного Кавказа.</p></div>
+            <div class="py-4"><i class="fas fa-lightbulb text-3xl mb-4 block"></i><h3 class="text-xl font-extrabold mb-2">Общественные инициативы</h3><p class="text-secondary text-sm">Поддерживаем проекты и мероприятия, развивающие интеллектуальную культуру региона.</p></div>
+        </div>
+    </div>
+</section>
+
+<div class="" aria-hidden="true"></div>
+
+<!-- ====== CTA ====== -->
+<section class="py-8 md:py-12">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-3xl mx-auto py-6 text-center">
+            <h2 class="heading-font text-3xl md:text-4xl font-extrabold text-gray-900">Участвуйте в проектах ассоциации</h2>
+            <p class="text-lg text-gray-700 mt-4 leading-relaxed">Следите за новостями, присоединяйтесь к мероприятиям или предложите совместную инициативу.</p>
+            <div class="mt-5 flex flex-wrap justify-center gap-3">
+                <a href="/contact" class="btn-primary px-8 py-3 text-base"><i class="fas fa-envelope mr-2"></i>Связаться с нами</a>
+                <a href="/faq" class="btn-outline-secondary px-7 py-3 text-base">Частые вопросы</a>
+            </div>
+            <p class="text-sm text-gray-500 mt-6">Тел./WhatsApp: 8 (928) 022-21-40 · info@intelkavkaz.ru</p>
+        </div>
+    </div>
+</section>
+
+{{ end }}

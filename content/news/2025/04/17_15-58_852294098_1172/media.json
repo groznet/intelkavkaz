@@ -1,0 +1,12 @@
+{
+  "base_url": "https://files.groznet.com/intelkavkaz/news/2025/04/17_15-58_852294098_1172",
+  "featured": "https://files.groznet.com/intelkavkaz/news/2025/04/17_15-58_852294098_1172/videos/video-01-thumb.jpg",
+  "images": [],
+  "videos": [
+    {
+      "src": "https://files.groznet.com/intelkavkaz/news/2025/04/17_15-58_852294098_1172/videos/video-1.mp4",
+      "poster": "https://files.groznet.com/intelkavkaz/news/2025/04/17_15-58_852294098_1172/videos/video-01-thumb.jpg",
+      "name": "video-1.mp4"
+    }
+  ]
+}

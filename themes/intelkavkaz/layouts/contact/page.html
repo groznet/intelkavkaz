@@ -1,0 +1,131 @@
+{{ define "main" }}
+
+<!-- ===== CONTACT HERO ===== -->
+<section class="relative overflow-hidden pt-8 pb-10 md:pt-12 md:pb-12">
+    <div class="container mx-auto px-5 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block text-primary text-sm font-semibold px-4 py-1.5 mb-5">
+                <i class="fas fa-phone-alt mr-1"></i> Свяжитесь с нами
+            </span>
+            <h1 class="heading-font text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-primary mb-6">
+                Контакты
+            </h1>
+            <p class="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                Мы всегда открыты для диалога. Задайте вопросы, предложите сотрудничество или просто поделитесь идеями — мы ответим оперативно.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT INFO GRID ===== -->
+<section class="py-8">
+    <div class="container mx-auto px-5 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <!-- Phone -->
+            <div class="py-2 text-center contact-icon-box">
+                <div class="w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-phone-alt text-2xl text-primary"></i>
+                </div>
+                <h4 class="heading-font text-lg font-bold text-primary">Телефон / WhatsApp</h4>
+                <a href="tel:+79280222140" class="text-gray-700 hover:text-secondary">8 (928) 022-21-40</a>
+            </div>
+            <!-- Email -->
+            <div class="py-2 text-center contact-icon-box">
+                <div class="w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-envelope text-2xl text-primary"></i>
+                </div>
+                <h4 class="heading-font text-lg font-bold text-primary">Email</h4>
+                <a href="mailto:info@intelkavkaz.ru" class="text-gray-700 hover:text-secondary">info@intelkavkaz.ru</a>
+            </div>
+            <!-- Address -->
+            <div class="py-2 text-center contact-icon-box">
+                <div class="w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marker-alt text-2xl text-primary"></i>
+                </div>
+                <h4 class="heading-font text-lg font-bold text-primary">Адрес офиса</h4>
+                <p class="text-gray-700">г. Грозный, Чеченская Республика (точный адрес уточняется)</p>
+            </div>
+            <!-- Social -->
+            <div class="py-2 text-center contact-icon-box">
+                <div class="w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-share-alt text-2xl text-primary"></i>
+                </div>
+                <h4 class="heading-font text-lg font-bold text-primary">Мы в соцсетях</h4>
+                <div class="flex justify-center space-x-4 text-2xl mt-2">
+                    <a href="https://vk.com/id196339167" target="_blank" class="text-gray-600 hover:text-secondary"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT FORM + MAP ===== -->
+<section class="py-10 md:py-12">
+    <div class="container mx-auto px-5 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <!-- Contact Form -->
+            <div>
+                <h2 class="heading-font text-2xl md:text-3xl font-bold text-primary mb-6">Напишите нам</h2>
+                <form id="contactForm" action="#" method="POST" class="space-y-5">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ваше имя *</label>
+                        <input disabled type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 bg-gray-200 disabled:cursor-not-allowed" />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                        <input disabled type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 bg-gray-200 disabled:cursor-not-allowed" />
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
+                        <input disabled type="tel" id="phone" name="phone"
+                                class="w-full px-4 py-3 bg-gray-200 disabled:cursor-not-allowed" />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Сообщение *</label>
+                        <textarea disabled id="message" name="message" rows="4" required
+                                    class="w-full px-4 py-3 bg-gray-200 disabled:cursor-not-allowed"></textarea>
+                    </div>
+                    <button disabled type="submit" class="w-full py-3 text-lg font-semibold text-white bg-gray-400 cursor-not-allowed">
+                        <i class="fas fa-paper-plane mr-2"></i>Отправить
+                    </button>
+                    <p class="text-xs text-gray-500 text-center mt-2">Нажимая «Отправить», вы соглашаетесь с <a href="/privacy" class="text-secondary hover:underline">политикой конфиденциальности</a>.</p>
+
+                    <!-- Уведомление об отключении формы -->
+                    <div class="p-3 bg-amber-50 text-amber-900 text-sm flex items-start space-x-2">
+                        <i class="fas fa-info-circle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                        <p>
+                            <strong>Обратите внимание:</strong> В настоящее время форма отключена, не обрабатывает и не собирает персональные данные в связи с требованиями Федерального закона «О персональных данных» № 152-ФЗ.
+                        </p>
+                    </div>
+                </form>
+                <div id="formSuccess" class="hidden mt-4 p-4 text-green-800 text-center">
+                    <i class="fas fa-check-circle text-2xl mr-2"></i> Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.
+                </div>
+            </div>
+
+            <!-- Map & Additional Info -->
+            <div class="space-y-6">
+                <div class="pt-4">
+                    <p class="text-sm text-gray-700"><i class="fas fa-info-circle text-secondary mr-2"></i> Для партнёрских предложений и вопросов членства звоните по номеру <strong>8 (928) 022-21-40</strong> или пишите на почту.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA: Join us (optional but consistent) ===== -->
+<section class="py-10 md:py-12">
+    <div class="container mx-auto px-5 lg:px-8 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="heading-font text-2xl md:text-3xl font-bold text-primary">Хотите стать частью «Интеллектуального Кавказа»?</h3>
+            <p class="text-gray-700 mt-2">Присоединяйтесь к ассоциации или предложите совместный проект.</p>
+            <a href="/about#team" class="btn-secondary-solid inline-flex items-center px-6 py-2.5 mt-4">
+                <i class="fas fa-handshake mr-2"></i>Узнать о членстве
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ end }}

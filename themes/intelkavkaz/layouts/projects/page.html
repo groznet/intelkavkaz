@@ -1,0 +1,265 @@
+{{ define "main" }}
+
+<style>
+    /* Flat project cards: no surface, no motion. Global tokens come from main.css */
+    .project-card { overflow: hidden; }
+    .project-image { height: 180px; overflow: hidden; position: relative; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; }
+    .project-image .status-badge {
+        position: absolute; top: 0; right: 0;
+        font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 0.3rem 0.75rem; background: var(--color-bg); color: var(--color-primary);
+    }
+    .project-body { padding: 1.25rem 0 0; }
+    .project-body .category {
+        font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--color-primary); margin-bottom: 0.5rem;
+    }
+    .project-body h3 { font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.25; }
+    .project-body p {
+        font-size: 0.9rem; line-height: 1.65; color: var(--color-text-secondary);
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .project-body .project-footer {
+        margin-top: 1rem; display: flex; align-items: center; justify-content: space-between;
+    }
+    .project-body .project-footer .project-link {
+        font-size: 0.8rem; font-weight: 700; color: var(--color-primary);
+        display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .project-body .project-footer .partners { font-size: 0.7rem; color: var(--color-text-secondary); }
+</style>
+
+<!-- ===== PROJECTS HERO ===== -->
+<section class="relative overflow-hidden pt-8 pb-10 md:pt-12 md:pb-12">
+    <div class="container mx-auto px-5 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block text-primary text-sm font-semibold px-4 py-1.5 mb-5">
+                <i class="fas fa-rocket mr-1"></i> Наши инициативы
+            </span>
+            <h1 class="heading-font text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-primary mb-6">
+                Проекты
+            </h1>
+            <p class="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                Мы реализуем программы, игры и социальные проекты, направленные на развитие молодёжи, поддержку детских объединений и создание новых возможностей.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS GRID ===== -->
+<section class="py-8 pb-12">
+    <div class="container mx-auto px-5 lg:px-8">
+        <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
+            <!-- Projects will be injected by JS -->
+        </div>
+        <!-- Loading / error states -->
+        <div id="projectsLoading" class="text-center py-12 text-gray-500">
+            <i class="fas fa-spinner fa-spin text-3xl text-primary mb-4 block"></i>
+            <p>Загрузка проектов...</p>
+        </div>
+        <div id="projectsError" class="hidden text-center py-12 text-red-500">
+            <i class="fas fa-exclamation-circle text-3xl mb-4 block"></i>
+            <p>Не удалось загрузить данные. Попробуйте позже.</p>
+        </div>
+        <div id="projectsEmpty" class="hidden text-center py-12 text-gray-500">
+            <i class="fas fa-folder-open text-4xl text-gray-300 mb-4 block"></i>
+            <p class="text-lg">Список проектов пока пуст.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA: Join us ===== -->
+<section class="py-10 md:py-12">
+    <div class="container mx-auto px-5 lg:px-8 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="heading-font text-2xl md:text-3xl font-bold text-primary">Хотите стать частью «Интеллектуального Кавказа»?</h3>
+            <p class="text-gray-700 mt-2">Присоединяйтесь к ассоциации или предложите совместный проект.</p>
+            <a href="/about#team" class="btn-secondary-solid inline-flex items-center px-6 py-2.5 mt-4">
+                <i class="fas fa-handshake mr-2"></i>Узнать о членстве
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS DATA FETCH AND RENDER ===== -->
+<script>
+    (function() {
+        const grid = document.getElementById('projectsGrid');
+        const loading = document.getElementById('projectsLoading');
+        const errorEl = document.getElementById('projectsError');
+        const emptyEl = document.getElementById('projectsEmpty');
+
+        // Sample projects data (fallback if JSON fetch fails)
+        const fallbackProjects = [{
+            "id": "vektor-2025",
+            "title": "Форум «Вектор-2025»",
+            "description": "Всероссийский молодёжный форум с интерактивными сессиями, играми и стратегическими сессиями для лидеров детских объединений.",
+            "image": "/assets/images/projects/vektor-2025.jpg",
+            "category": "Форумы",
+            "status": "upcoming",
+            "partners": "Росмолодёжь, Минобр ЧР",
+            "link": "/projects/vektor-2025"
+        }, {
+            "id": "marshrut-pokoleniy",
+            "title": "Маршрут поколений",
+            "description": "Интерактивный исторический квест для школьников и студентов, знакомящий с историей региона через командные игры и цифровые технологии.",
+            "image": "/assets/images/projects/marshrut-pokoleniy.jpg",
+            "category": "Квесты",
+            "status": "completed",
+            "partners": "Музей ЧР, Минкультуры ЧР",
+            "link": "/projects/marshrut-pokoleniy"
+        }, {
+            "id": "molodezhnaya-iniciativa",
+            "title": "Молодёжная инициатива",
+            "description": "Грантовая программа поддержки социальных проектов для детских и молодёжных НКО. Призовой фонд — 1,5 млн рублей.",
+            "image": "/assets/images/projects/molodezhnaya-iniciativa.jpg",
+            "category": "Гранты",
+            "status": "ongoing",
+            "partners": "Фонд президентских грантов",
+            "link": "/projects/molodezhnaya-iniciativa"
+        }, {
+            "id": "chistye-igry",
+            "title": "Чистые игры",
+            "description": "Экологический марафон с элементами интерактивной игры. Участники собирают мусор, сортируют отходы и участвуют в экологических квестах.",
+            "image": "/assets/images/projects/chistye-igry.jpg",
+            "category": "Экология",
+            "status": "completed",
+            "partners": "Экоцентр ЧР, Волонтёры",
+            "link": "/projects/chistye-igry"
+        }, {
+            "id": "letnyaya-shkola",
+            "title": "Летняя школа актива",
+            "description": "Образовательная программа для молодёжных лидеров. Командообразующие игры, воркшопы по проектированию, развитию soft skills.",
+            "image": "/assets/images/projects/letnyaya-shkola.jpg",
+            "category": "Образование",
+            "status": "upcoming",
+            "partners": "ЧГУ, Минобр ЧР",
+            "link": "/projects/letnyaya-shkola"
+        }, {
+            "id": "festival-detskih",
+            "title": "Фестиваль детских объединений",
+            "description": "Выставка проектов, мастер-классы, награждение активистов. Фестиваль собрал более 300 участников из 10 регионов.",
+            "image": "/assets/images/projects/festival-detskih.jpg",
+            "category": "Фестивали",
+            "status": "completed",
+            "partners": "Департамент образования",
+            "link": "/projects/festival-detskih"
+        }, {
+            "id": "igroteka",
+            "title": "Игротека актива",
+            "description": "Презентация и разработка мобильных игр, созданных участниками Совета. Игры направлены на развитие soft skills и командной работы.",
+            "image": "/assets/images/projects/igroteka.jpg",
+            "category": "Игры",
+            "status": "ongoing",
+            "partners": "IT-парк Грозный",
+            "link": "/projects/igroteka"
+        }, {
+            "id": "forum-itogi",
+            "title": "Итоговый форум проектов",
+            "description": "Презентация 25 проектов, 7 из которых получили грантовую поддержку. Участники отметили высокий уровень организации и экспертизы.",
+            "image": "/assets/images/projects/forum-itogi.jpg",
+            "category": "Форумы",
+            "status": "completed",
+            "partners": "Общественная палата ЧР",
+            "link": "/projects/forum-itogi"
+        }];
+
+        async function loadProjects() {
+            try {
+                const response = await fetch('/data/projects.json');
+                if (!response.ok) {
+                    console.warn('Projects JSON not found, using fallback data.');
+                    return fallbackProjects;
+                }
+                const data = await response.json();
+                return data;
+            } catch (e) {
+                console.warn('Error loading projects JSON, using fallback data.', e);
+                return fallbackProjects;
+            }
+        }
+
+        function getStatusBadgeClass(status) {
+            const map = {
+                'completed': 'completed',
+                'завершён': 'completed',
+                'ongoing': 'ongoing',
+                'активный': 'ongoing',
+                'upcoming': 'upcoming',
+                'предстоящий': 'upcoming'
+            };
+            return map[status] || 'upcoming';
+        }
+
+        function getStatusLabel(status) {
+            const map = {
+                'completed': 'Завершён',
+                'завершён': 'Завершён',
+                'ongoing': 'Активный',
+                'активный': 'Активный',
+                'upcoming': 'Предстоящий',
+                'предстоящий': 'Предстоящий'
+            };
+            return map[status] || status;
+        }
+
+        function renderProjects(projects) {
+            loading.classList.add('hidden');
+            if (!projects || projects.length === 0) {
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+            emptyEl.classList.add('hidden');
+
+            let html = '';
+            for (const p of projects) {
+                const statusClass = getStatusBadgeClass(p.status);
+                const statusLabel = getStatusLabel(p.status);
+                const image = p.image || '/assets/images/projects/default-project.jpg';
+                html += `
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="${image}" alt="${p.title}" loading="lazy" onerror="this.src='/assets/images/projects/default-project.jpg'" />
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
+                        </div>
+                        <div class="project-body">
+                            ${p.category ? `<div class="category">${p.category}</div>` : ''}
+                            <h3>${p.title}</h3>
+                            ${p.description ? `<p>${p.description}</p>` : ''}
+                            <div class="project-footer">
+                                ${p.link ? `<a href="${p.link}" class="project-link">Подробнее <i class="fas fa-arrow-right text-xs"></i></a>` : ''}
+                                ${p.partners ? `<span class="partners"><i class="fas fa-handshake mr-1"></i>${p.partners}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        async function init() {
+            const projects = await loadProjects();
+            renderProjects(projects);
+        }
+
+        init();
+
+        // ---------- MOBILE MENU FALLBACK ----------
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+    })();
+</script>
+
+{{ end }}

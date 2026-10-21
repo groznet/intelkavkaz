@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Интеллектуальный Кавказ — региональное отделение Всероссийской ассоциации общественных объединений «Интеллектуальная Россия» в Чеченской Республике. Новости, проекты и мероприятия.">
+    <meta name="keywords" content="Интеллектуальный Кавказ, Интеллектуальная Россия, Чеченская Республика, интеллектуальные игры, ЧГК, образовательные проекты, новости">
+    <meta name="author" content="Интеллектуальный Кавказ">
+    <title>Интеллектуальный Кавказ | «Интеллектуальная Россия» в Чеченской Республике</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- TailwindCSS v3 + base utilities (default theme) -->
+    <script src="/assets/js/tailwind.js?plugins=typography"></script>
+    <!-- Custom overrides: brand colors, paper texture, fonts -->
+    <!-- main.css file most common styles -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="antialiased">
+    <div class="content-wrapper">
+        <!-- HEADER: Loaded dynamically from /components/header.html -->
+        <header class="bg-paper sticky top-0 z-50">
+            {{ partial "header.html" . }}
+            {{ partial "ridge.html" "header" }}
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            {{ block "main" . }}{{ end }}
+        </main>
+
+        <!-- FOOTER: Loaded dynamically from /components/footer.html -->
+        <footer class="mt-10">
+            {{ partial "ridge.html" "footer" }}
+            <div class="pt-8 pb-4">
+            {{ partial "footer.html" . }}
+            </div>
+        </footer>
+    </div>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

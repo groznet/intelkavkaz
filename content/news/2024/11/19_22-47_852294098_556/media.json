@@ -1,0 +1,12 @@
+{
+  "base_url": "https://files.groznet.com/intelkavkaz/news/2024/11/19_22-47_852294098_556",
+  "featured": "https://files.groznet.com/intelkavkaz/news/2024/11/19_22-47_852294098_556/videos/video-01-thumb.jpg",
+  "images": [],
+  "videos": [
+    {
+      "src": "https://files.groznet.com/intelkavkaz/news/2024/11/19_22-47_852294098_556/videos/video-1.mp4",
+      "poster": "https://files.groznet.com/intelkavkaz/news/2024/11/19_22-47_852294098_556/videos/video-01-thumb.jpg",
+      "name": "video-1.mp4"
+    }
+  ]
+}

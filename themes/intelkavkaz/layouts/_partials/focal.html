@@ -1,0 +1,16 @@
+{{/*
+    Возвращает значение CSS object-position для обложки поста, напр. "50% 35%".
+    Приоритет: focalX/focalY из front matter → данные scripts/compute_focal.py
+    (data/focal.json, smartcrop) → 50% 35%.
+*/}}
+{{ $x := 50 }}
+{{ $y := 35 }}
+{{ with hugo.Data.focal }}
+    {{ with and $.File (index . $.File.ContentBaseName) }}
+        {{ $x = index . 0 }}
+        {{ $y = index . 1 }}
+    {{ end }}
+{{ end }}
+{{ with .Params.focalX }}{{ $x = . }}{{ end }}
+{{ with .Params.focalY }}{{ $y = . }}{{ end }}
+{{ return printf "%v%% %v%%" $x $y }}

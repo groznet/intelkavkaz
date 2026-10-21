@@ -1,0 +1,300 @@
+/* ----- INTELKAVKAZ: TYPOGRAPHY-FIRST (see REDESIGN.md) -----
+   One paper surface. No shadows, borders, fills, gradients, rounded corners or hover motion.
+   The only rule on the page is a hairline between sidebar and main content.
+   Hierarchy comes from type scale and whitespace. */
+:root {
+    --color-primary: #2B2620;     /* deep charcoal: TEXT ONLY, never a background */
+    --color-secondary: #C4866D;   /* warm clay: ridge lines / rules only */
+    --color-accent: #8B7355;      /* mountain stone: large/decorative text only */
+    --color-accent-alt: #D4A574;
+    --color-ridge-rock: #9FB0BF;  /* Caucasus ridge: distant blue-grey rock */
+    --color-ridge-snow: #FFFFFF;  /* Caucasus ridge: snow caps */
+    --color-ridge-far: #8FAE7E;   /* Caucasus ridge: distant sage-green range */
+    --color-ridge-near: #4E7A3F;  /* Caucasus ridge: near forest-green range */
+    --color-bg: #F5F3F0;          /* paper */
+    --color-sidebar-tint: #EDE8E0;
+    --color-text-dark: #2B2620;
+    --color-text-secondary: #5A5550;
+    --font-heading: 'Manrope', 'Inter', system-ui, sans-serif;   /* UI labels */
+    --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;   /* headings */
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'Fira Code', ui-monospace, monospace;
+}
+html { background-color: var(--color-bg); }
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg);
+    line-height: 1.7;
+    font-size: 1rem;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+.content-wrapper { position: relative; z-index: 2; background-color: var(--color-bg); }
+
+/* palette utilities (Tailwind Play CDN has no custom config) */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-accent { color: var(--color-primary); }
+.text-muted { color: var(--color-text-secondary); }
+.text-clay { color: var(--color-secondary); }
+.text-stone { color: var(--color-accent); }  /* large display text only (AA large) */
+.bg-paper { background-color: var(--color-bg); }
+.bg-secondary { background-color: var(--color-secondary); }  /* status dots only */
+.text-gray-400, .text-gray-500 { color: var(--color-text-secondary); }
+.text-gray-600, .text-gray-700 { color: var(--color-text-secondary); }
+.text-gray-800, .text-gray-900 { color: var(--color-primary); }
+/* hover/active on paper: primary + underline (clay/stone do not reach AA as small text) */
+.hover\:text-accent:hover, .hover\:text-secondary:hover, .hover\:text-primary:hover,
+.group:hover .group-hover\:text-secondary { color: var(--color-primary); text-decoration: underline; text-underline-offset: 4px; }
+
+/* buttons: unboxed, typographic */
+.btn-primary, .btn-secondary-solid, .btn-outline-secondary {
+    background: none; border: 0; color: var(--color-primary);
+    font-weight: 700; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px;
+}
+
+/* cards are plain content: no surface, no outline */
+.card-hover, .news-card { background: none; border: 0; }
+.news-card .news-card-title a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* headings: serif for page, article, section and card titles */
+h1, h2, h3, h4, h5, h6, .heading-font, .prose :where(h1,h2,h3,h4,h5,h6) {
+    font-family: var(--font-serif) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.015em;
+    line-height: 1.18;
+    text-wrap: balance;
+}
+/* UI labels stay sans: sidebar widget titles, header brand, footer headings */
+.sidebar-widget h3, header .heading-font, footer h1, footer h2, footer h3, footer h4 {
+    font-family: 'Manrope', 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
+}
+h1, h2, h3, h4 { color: var(--color-primary); }
+h1 { letter-spacing: -0.02em; line-height: 1.1; }
+.section-title { display: inline-block; }
+.pagination-btn { min-width: 2.25rem; text-align: center; color: var(--color-primary); font-weight: 500; }
+.pagination-btn[class*="cursor-default"] { font-weight: 800; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+/* inputs: unboxed, text-only affordance */
+input, select, textarea { background: transparent; border: 0; outline: none; border-radius: 0; }
+input::placeholder { color: var(--color-text-secondary); }
+
+/* mobile menu smooth */
+.mobile-menu-open {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+}
+
+p {
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.prose iframe,
+.prose video {
+    width: 100% !important;
+    aspect-ratio: 16 / 9;
+    height: auto !important;
+    border-radius: 0;
+}
+
+/* article text: ~65ch measure, generous leading, rhythm in em */
+.post-content { max-width: 40rem; font-size: 1.125rem; line-height: 1.8; color: var(--color-text-secondary); }
+.post-content p { margin: 0 0 1.4em; }
+.post-content h2 { font-size: 1.6rem; margin: 2.4em 0 0.7em; }
+.post-content h3 { font-size: 1.25rem; margin: 2em 0 0.5em; }
+.post-content ul { list-style-type: disc; padding-left: 1.4em; margin: 0 0 1.4em; }
+.post-content ol { list-style-type: decimal; padding-left: 1.4em; margin: 0 0 1.4em; }
+.post-content li { margin-bottom: 0.4em; }
+.post-content a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.post-content blockquote { margin: 1.8em 0; padding: 0; font-size: 1.25rem; line-height: 1.5; color: var(--color-primary); }
+article h1 { max-width: none; text-wrap: wrap; }
+
+
+/* Sidebar Styles */
+
+/* Mobile sidebar toggle styles */
+.archive-sidebar-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    width: 56px;
+    height: 56px;
+    border-radius: 0;
+    background: var(--color-primary, #2B2620);
+    color: white;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Sidebar overlay (mobile) */
+.archive-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.archive-sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Sidebar panel */
+.archive-sidebar {
+    position: relative;
+    /* default: static in flow on desktop */
+}
+
+/* On mobile, we make it fixed and slide from left */
+@media (max-width: 1023px) {
+    .archive-sidebar-toggle {
+        display: flex;
+    }
+
+    .archive-sidebar-overlay {
+        display: block;
+    }
+
+    .archive-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 320px;
+        max-width: 85vw;
+        height: 100%;
+        z-index: 1000;
+        background: var(--color-bg);
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        padding: 1.5rem 1.25rem 2rem;
+        display: block !important; /* override any flex */
+    }
+
+    .archive-sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Hide the sticky behavior on mobile */
+    .archive-sidebar .sticky {
+        position: static !important;
+    }
+
+    /* Close button inside sidebar (mobile) */
+    .archive-sidebar-close {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .archive-sidebar-close {
+        display: none !important;
+    }
+    .archive-sidebar-overlay {
+        display: none !important;
+    }
+    .archive-sidebar-toggle {
+        display: none !important;
+    }
+}
+
+.archive-sidebar-close {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    margin-left: auto;
+    margin-bottom: 0.5rem;
+}
+
+header nav a { white-space: nowrap; }
+
+/* mobile: keep header inside the viewport */
+header { overflow-x: hidden; max-width: 100vw; }
+header .container > div { min-width: 0; }
+@media (max-width: 639px) {
+    header .heading-font { font-size: 0.95rem; line-height: 1.15; }
+    header .w-36 { width: 4.5rem; }
+    header .w-12 { width: 2.25rem; height: 2.25rem; }
+    header .shrink-0 { flex-shrink: 1; }
+    header .container > div:first-child { min-width: 0; }
+    header .min-w-0 { max-width: 100%; align-self: stretch; }
+}
+
+/* ----- LIGHT HEADER / FOOTER + MOUNTAIN RIDGE SEPARATORS ----- */
+header { background-color: var(--color-bg); }
+header a { color: var(--color-primary); }
+header a:hover { text-decoration: underline; text-underline-offset: 4px; }
+header input, header input::placeholder { color: var(--color-text-secondary); }
+#mobileMenu { background-color: var(--color-bg); }
+footer { margin-top: 6rem; }
+/* faint hairlines: header bottom edge and footer top edge (same tone as the sidebar divider) */
+header { border-bottom: 0; }
+article header { border-bottom: 0; }
+footer { border-top: 0; }
+.ridge { display: block; }
+.ridge-footer { transform: scaleY(-1); }
+.ridge-rock { fill: var(--color-ridge-rock); }
+.ridge-snow { fill: var(--color-ridge-snow); }
+.ridge-far { fill: var(--color-ridge-far); }
+.ridge-near { fill: var(--color-ridge-near); }
+footer { background-color: var(--color-bg); color: var(--color-primary); }
+
+/* sidebar: hairline divider is the only separation; spacing groups the widgets */
+.sidebar-widget { background: none; padding: 1.25rem !important; border: 1px solid rgba(43, 38, 32, 0.12); }
+.sidebar-widget + .sidebar-widget { margin-top: 1.25rem; }
+/* month archive stays unboxed: no border, no padding, original 2.5rem rhythm */
+.sidebar-widget.sidebar-widget-plain { padding: 0 !important; border: 0; }
+.sidebar-widget + .sidebar-widget-plain, .sidebar-widget-plain + .sidebar-widget { margin-top: 2.5rem; }
+/* faint hairline separates an unboxed widget from the one above it */
+.sidebar-widget ~ .sidebar-widget.sidebar-widget-plain { border-top: 1px solid rgba(43, 38, 32, 0.12); padding-top: 1.25rem !important; margin-top: 1.25rem; }
+.sidebar-widget-plain + .sidebar-widget { margin-top: 1.25rem; }
+@media (min-width: 1024px) {
+    .archive-sidebar { border-right: 1px solid rgba(43, 38, 32, 0.12); padding-right: 2rem; }
+}
+.sidebar-widget h3 {
+    font-size: 0.7rem;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+.sidebar-widget .text-gray-400, .sidebar-widget .text-gray-500 { color: var(--color-text-secondary); }
+
+/* whitespace rhythm: between sections, between cards, around the page */
+main section + section { margin-top: 2rem; }
+.news-card { margin-bottom: 1rem; }
+.news-card .news-card-title { line-height: 1.2; }
+@media (min-width: 1024px) {
+    main > .container, main .container { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* post list titles (home, news list, archive, search results) stay sans-serif */
+.news-card-title, .news-card h3, #postsContainer h3 {
+    font-family: 'Manrope', 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
