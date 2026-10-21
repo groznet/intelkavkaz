@@ -16,7 +16,7 @@ SITE_SLUG = "intelkavkaz"
 MEDIA_SERVER_BASE = "https://files.groznet.com"
 CONTENT_SECTION = "news"
 
-SKIP_EXISTING_MEDIA_JSON = False  # Set to True to skip directories with existing media.json
+SKIP_EXISTING_MEDIA_JSON = True  # Set to True to skip directories with existing media.json
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CONTENT_DIR = (SCRIPT_DIR.parent / "content" / CONTENT_SECTION).resolve()
