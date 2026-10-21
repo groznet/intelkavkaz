@@ -4,8 +4,8 @@ draft = false
 title = "Без названия"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Фотоотчёт"]
+categories = ["Новости клуба"]
 +++
 
 

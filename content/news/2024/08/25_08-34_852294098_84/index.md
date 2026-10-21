@@ -4,8 +4,8 @@ draft = false
 title = "МАШУК-2024"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Машук"]
+categories = ["Форумы и конференции"]
 +++
 
 МАШУК-2024

@@ -1,0 +1,72 @@
+{{ define "main" }}
+
+<!-- ============================================================
+    RUBRIKI HUB — categories as cards, popular tags as a cloud
+    Links go to the standard taxonomy/term pages (/categories/, /tags/)
+    ============================================================ -->
+
+{{ $categories := site.Taxonomies.categories.ByCount }}
+{{ $tags := site.Taxonomies.tags.ByCount }}
+{{ $tagLimit := 40 }}
+
+<section class="relative overflow-hidden pt-12 pb-8 md:pt-16 md:pb-10">
+    <div class="container mx-auto px-4 lg:px-8">
+        <span class="inline-block text-primary text-sm font-semibold px-4 py-1.5 mb-3">
+            <i class="fas fa-tags mr-1"></i> Навигация по темам
+        </span>
+        <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary">{{ .Title }}</h1>
+        {{ with .Description }}
+            <p class="text-gray-600 mt-2 max-w-2xl">{{ . }}</p>
+        {{ end }}
+    </div>
+</section>
+
+<div class="container mx-auto px-4 lg:px-8 pb-20 space-y-14">
+
+    <!-- ====== CATEGORIES ====== -->
+    <section aria-labelledby="rubriki-categories">
+        <div class="flex items-baseline justify-between mb-5">
+            <h2 id="rubriki-categories" class="heading-font text-2xl font-bold text-primary">Категории</h2>
+            <a href="{{ "categories/" | relLangURL }}" class="text-sm font-semibold text-primary hover:underline">Все категории &rarr;</a>
+        </div>
+
+        {{ if $categories }}
+            <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {{ range $categories }}
+                    <li>
+                        <a href="{{ .Page.RelPermalink }}" class="flex items-center justify-between gap-3 h-full p-5 bg-paper text-primary hover:underline">
+                            <span class="font-semibold">{{ .Page.Title }}</span>
+                            <span class="text-xs font-semibold px-2 py-0.5">{{ .Count }}</span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ul>
+        {{ else }}
+            <p class="text-gray-500">Категории пока не добавлены.</p>
+        {{ end }}
+    </section>
+
+    <!-- ====== TAGS ====== -->
+    <section aria-labelledby="rubriki-tags">
+        <div class="flex items-baseline justify-between mb-5">
+            <h2 id="rubriki-tags" class="heading-font text-2xl font-bold text-primary">Популярные теги</h2>
+            <a href="{{ "tags/" | relLangURL }}" class="text-sm font-semibold text-primary hover:underline">Все теги ({{ len $tags }}) &rarr;</a>
+        </div>
+
+        {{ if $tags }}
+            <div class="flex flex-wrap items-center gap-2.5">
+                {{ range first $tagLimit $tags }}
+                    <a href="{{ .Page.RelPermalink }}" class="inline-flex items-center gap-2 text-sm text-primary px-3.5 py-1.5 hover:underline">
+                        <span>{{ .Page.Title }}</span>
+                        <span class="text-[11px] font-semibold">{{ .Count }}</span>
+                    </a>
+                {{ end }}
+            </div>
+        {{ else }}
+            <p class="text-gray-500">Теги пока не добавлены.</p>
+        {{ end }}
+    </section>
+
+</div>
+
+{{ end }}

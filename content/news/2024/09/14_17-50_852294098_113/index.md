@@ -4,8 +4,8 @@ draft = false
 title = "И снова здравствуй!"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Фестиваль «Перекрёсток»", "Интеллектуальные игры"]
+categories = ["Турниры и игры"]
 +++
 
 И снова здравствуй!

@@ -4,8 +4,8 @@ draft = false
 title = "1 день - 4 кубка."
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Интеллектуальные игры"]
+categories = ["Турниры и игры"]
 +++
 
 1 день - 4 кубка.

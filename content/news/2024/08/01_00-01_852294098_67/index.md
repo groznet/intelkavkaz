@@ -4,8 +4,8 @@ draft = false
 title = "27 июля 2024г. образовательный центр Maximum совместно с обр"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Интеллектуальные игры"]
+categories = ["Турниры и игры"]
 +++
 
 27 июля 2024г. образовательный центр Maximum совместно с образовательным центром «Rise» @rise_english,

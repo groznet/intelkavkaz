@@ -4,8 +4,8 @@ draft = false
 title = "Ещё немного фото с \"Квиз-23\"📸"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Квиз", "Фотоотчёт"]
+categories = ["Турниры и игры"]
 +++
 
 Ещё немного фото с "Квиз-23"📸

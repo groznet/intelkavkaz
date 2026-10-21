@@ -4,8 +4,8 @@ draft = false
 title = "Открытие филиала в селе Серноводск🎉🎉🎉"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Серноводский район"]
+categories = ["Филиалы клуба"]
 +++
 
 Открытие филиала в селе Серноводск🎉🎉🎉

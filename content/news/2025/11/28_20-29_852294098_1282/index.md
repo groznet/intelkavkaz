@@ -4,8 +4,8 @@ draft = false
 title = "Открытие филиала в Шатойском районе🎉🎉🎉"
 author = "Intelkavkaz"
 
-tags = []
-categories = []
+tags = ["Шатойский район"]
+categories = ["Филиалы клуба"]
 +++
 
 Открытие филиала в Шатойском районе🎉🎉🎉
