@@ -254,7 +254,18 @@ header { border-bottom: 0; }
 article header { border-bottom: 0; }
 footer { border-top: 0; }
 .ridge { display: block; }
-.ridge-footer { transform: scaleY(-1); }
+.ridge-footer { position: relative; height: 96px; }
+@media (min-width: 768px) { .ridge-footer { height: 140px; } }
+.ridge-footer .ridge-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Chechen (Vainakh) watchtowers: stone body, stepped roof, dark window slits; bases hide behind the green hills */
+.ridge-tower { position: absolute; bottom: 28%; width: auto; aspect-ratio: 2 / 5; transform: translateX(-50%); }
+.ridge-fade { fill: var(--color-ridge-far); opacity: 0.45; }
+/* footer-coloured curve: the hills melt into the footer instead of ending on a flat line */
+.ridge-blend { fill: var(--color-bg); }
+.ridge-tower-front { bottom: 6%; }
+.tower-body { fill: #8C8478; }
+.tower-roof { fill: #6B645A; }
+.tower-hole { fill: var(--color-primary); }
 .ridge-rock { fill: var(--color-ridge-rock); }
 .ridge-snow { fill: var(--color-ridge-snow); }
 .ridge-far { fill: var(--color-ridge-far); }
